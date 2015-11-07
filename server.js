@@ -45,6 +45,7 @@ app.use(function(req, res, next) {
   res.locals.user = req.user;
   next();
 });
+app.locals.moment = require('moment');
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport

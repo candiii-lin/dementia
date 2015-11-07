@@ -1,10 +1,23 @@
+var Patient = require('./models/patient');
 module.exports = function(app, passport) {
 
 // normal routes ===============================================================
 
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
-        res.render('index.ejs');
+      if (req.isAuthenticated()) {
+          var query = Patient.find({});
+          query.where('_id').in(req.user.patient);
+
+          query.exec(function (err,patients) {
+            res.render('home.ejs', {
+              patients: patients
+            });
+          });
+
+      } else {
+          res.render('index.ejs');
+      }
     });
 
     // PROFILE SECTION =========================

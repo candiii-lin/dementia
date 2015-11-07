@@ -1,0 +1,14 @@
+<div>
+  <% if (patient) { %>
+      <p>
+          <strong>first name</strong>: <%= patient.first_name %><br>
+          <strong>last name</strong>: <%= patient.last_name %><br>
+          <strong>birth date</strong>: <%= moment(patient.birth_date).format('l') %>
+      </p>
+
+  <% } else { %>
+      <p>
+        patient do not exist
+      </p>
+  <% } %>
+</div>

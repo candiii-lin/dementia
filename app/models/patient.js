@@ -1,13 +1,9 @@
-var mongoose = require('mongoose'),
-    relationship = require("mongoose-relationship");
+var mongoose = require('mongoose');
 
 var patientSchema = mongoose.Schema({
   first_name: String,
   last_name: String,
-  birth_date: Date,
-  caregiver: { type:mongoose.Schema.ObjectId, ref:"User", childPath:"patient" }
+  birth_date: Date
 });
-
-patientSchema.plugin(relationship, { relationshipPathName:'user' });
 
 module.exports = mongoose.model('Patient', patientSchema);
