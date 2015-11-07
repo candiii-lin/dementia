@@ -11,6 +11,10 @@ module.exports = function(grunt) {
             src: ['bootstrap.js'], dest: 'public/js/vendor'
           },
           {
+            expand: true, cwd: 'bower_components/eonasdan-bootstrap-datetimepicker/src/js/',
+            src: ['*'], dest: 'public/js/vendor'
+          },
+          {
             expand: true, cwd: 'bower_components/bootstrap/',
             src: ['less/**'], dest: 'public/css/vendor/bootstrap/'
           },
@@ -40,8 +44,8 @@ module.exports = function(grunt) {
           'public/js/lib/vendor.js': [
             'public/js/vendor/jquery.js',
             'public/js/vendor/jquery-ui.min.js',
-            'public/js/vendor/bootstrap.js'
-
+            'public/js/vendor/bootstrap.js',
+            'public/js/vendor/bootstrap-datetimepicker.js'
           ]
         }
       }
