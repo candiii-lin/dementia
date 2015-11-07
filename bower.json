@@ -1,0 +1,21 @@
+{
+  "name": "dementia",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "candice Lin <candii.lin@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/scotch-io/easy-node-authentication",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}

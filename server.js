@@ -13,6 +13,7 @@ var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+var ejsLayouts = require("express-ejs-layouts");
 
 var configDB = require('./config/database.js');
 
@@ -28,12 +29,20 @@ app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs'); // set up ejs for templating
+app.set("views","./views");
+
+app.use(ejsLayouts);
 
 // required for passport
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(function(req, res, next) {
+  // Make user object available in templates.
+  res.locals.user = req.user;
+  next();
+});
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
