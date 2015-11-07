@@ -11,6 +11,7 @@
     "express": "~4.0.0",
     "express-ejs-layouts": "^2.0.0",
     "express-session": "~1.0.0",
+    "firebase": "^2.3.1",
     "less": "^2.5.3",
     "lodash": "^3.10.1",
     "method-override": "~1.0.0",

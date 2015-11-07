@@ -41,6 +41,10 @@ module.exports = function(grunt) {
           {
             expand: true, cwd: 'bower_components/bootstrap/fonts/',
             src: ['*'], dest: 'public/fonts'
+          },
+          {
+            expand: true, cwd: 'bower_components/firebase/',
+            src: ['firebase.js'], dest: 'public/js/vendor'
           }
         ]
       }
@@ -58,7 +62,8 @@ module.exports = function(grunt) {
             'public/js/vendor/jquery-ui.min.js',
             'public/js/vendor/bootstrap.js',
             'public/js/vendor/moment.min.js',
-            'public/js/vendor/bootstrap-datetimepicker.js'
+            'public/js/vendor/bootstrap-datetimepicker.js',
+            'public/js/vendor/firebase.firebase.js'
           ]
         }
       }

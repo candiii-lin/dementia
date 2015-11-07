@@ -36,6 +36,7 @@ module.exports = function(app, passport) {
 
     require('./routes/authentication.js')(app, passport, isLoggedIn);
     require('./routes/patient.js')(app, passport, isLoggedIn);
+    require('./routes/alerts.js')(app, passport);
 
 };
 
