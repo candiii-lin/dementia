@@ -1,55 +1,78 @@
-module.exports = function(grunt) {
+var path = require('path');
 
+module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    copy: {
+      vendor: {
+        files: [
+          {
+            expand: true, cwd: 'bower_components/bootstrap/dist/js/',
+            src: ['bootstrap.js'], dest: 'public/js/vendor'
+          },
+          {
+            expand: true, cwd: 'bower_components/bootstrap/',
+            src: ['less/**'], dest: 'public/css/vendor/bootstrap/'
+          },
+          {
+            expand: true, cwd: 'bower_components/font-awesome/',
+            src: ['less/**'], dest: 'public/css/vendor/font-awesome/'
+          },
+          {
+            expand: true, cwd: 'bower_components/jquery/dist/',
+            src: ['jquery.js'], dest: 'public/js/vendor'
+          },
+          {
+            expand: true, cwd: 'bower_components/font-awesome/fonts/',
+            src: ['*'], dest: 'public/fonts'
+          }
+        ]
+      }
+    },
+    clean: {
+      vendor: {
+        src: ['public/js/vendor/**', 'public/css/vendor']
+      }
+    },
     concat: {
-      options: {
-        separator: ';'
-      },
       dist: {
-        src: ['src/**/*.js'],
-        dest: 'dist/bundle.js'
+        files: {
+          'public/js/lib/vendor.js': [
+            'public/js/vendor/jquery.js',
+            'public/js/vendor/jquery-ui.min.js',
+            'public/js/vendor/bootstrap.js'
+
+          ]
+        }
+      }
+    },
+    less: {
+      development: {
+        options: {
+          compress: true,
+          yuicompress: true,
+          optimization: 2
+        },
+        files: {
+          "public/css/main.css": "public/css/mixins.less" // destination file and source file
+        }
       }
     },
     uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-      },
       dist: {
         files: {
-          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+          'public/js/lib/vendor.min.js': ['public/js/lib/vendor.js']
         }
       }
-    },
-    qunit: {
-      files: ['test/**/*.html']
-    },
-    jshint: {
-      files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
-      options: {
-        // options here to override JSHint defaults
-        globals: {
-          jQuery: true,
-          console: true,
-          module: true,
-          document: true
-        }
-      }
-    },
-    watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint', 'qunit']
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-less');
 
-  grunt.registerTask('test', ['jshint', 'qunit']);
-
-  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
-
+  grunt.registerTask('default', ['copy:vendor', 'concat', 'less', 'uglify']);
 };

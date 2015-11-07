@@ -31,6 +31,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs'); // set up ejs for templating
 app.set("views","./views");
 
+app.use(express.static('public'));
+
 app.use(ejsLayouts);
 
 // required for passport
