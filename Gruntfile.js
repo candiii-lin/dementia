@@ -15,6 +15,14 @@ module.exports = function(grunt) {
             src: ['*'], dest: 'public/js/vendor'
           },
           {
+            expand: true, cwd: 'bower_components/eonasdan-bootstrap-datetimepicker/build/css/',
+            src: ['*'], dest: 'public/css/vendor/bootstrap-datetimepicker'
+          },
+          {
+            expand: true, cwd: 'bower_components/moment/min/',
+            src: ['moment.min.js'], dest: 'public/js/vendor'
+          },
+          {
             expand: true, cwd: 'bower_components/bootstrap/',
             src: ['less/**'], dest: 'public/css/vendor/bootstrap/'
           },
@@ -29,13 +37,17 @@ module.exports = function(grunt) {
           {
             expand: true, cwd: 'bower_components/font-awesome/fonts/',
             src: ['*'], dest: 'public/fonts'
+          },
+          {
+            expand: true, cwd: 'bower_components/bootstrap/fonts/',
+            src: ['*'], dest: 'public/fonts'
           }
         ]
       }
     },
     clean: {
       vendor: {
-        src: ['public/js/vendor/**', 'public/css/vendor']
+        src: ['public/js/vendor/**', 'public/css/vendor/**']
       }
     },
     concat: {
@@ -45,6 +57,7 @@ module.exports = function(grunt) {
             'public/js/vendor/jquery.js',
             'public/js/vendor/jquery-ui.min.js',
             'public/js/vendor/bootstrap.js',
+            'public/js/vendor/moment.min.js',
             'public/js/vendor/bootstrap-datetimepicker.js'
           ]
         }

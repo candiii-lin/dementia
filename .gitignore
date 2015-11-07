@@ -16,6 +16,7 @@ node_modules
 bower_components
 public/js/lib/vendor*
 public/js/vendor/*
+public/fonts
 
 public/css/vendor/*
 
