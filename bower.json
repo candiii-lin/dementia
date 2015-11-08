@@ -19,6 +19,7 @@
     "bootstrap": "~3.3.5",
     "jquery": "~2.1.4",
     "eonasdan-bootstrap-datetimepicker": "~4.17.37",
-    "moment": "~2.10.6"
+    "moment": "~2.10.6",
+    "gmaps": "~0.4.21"
   }
 }

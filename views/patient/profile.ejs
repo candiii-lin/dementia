@@ -12,3 +12,14 @@
       </p>
   <% } %>
 </div>
+
+<% if (patient.last_known_position) { %>
+<input type="hidden" value="<%= patient.last_known_position.x %>" id="lat">
+<input type="hidden" value="<%= patient.last_known_position.y %>" id="long">
+
+
+<h2>Last Known Location</h2>
+  <div class="row">
+    <div id="map"></div>
+  </div>
+<% } %>

@@ -47,6 +47,10 @@ module.exports = function(grunt) {
             src: ['jquery.dataTables.js'], dest: 'public/js/vendor/datatables'
           },
           {
+            expand: true, cwd: 'bower_components/maplace.js/src/',
+            src: ['maplace-0.1.3.js'], dest: 'public/js/vendor'
+          },
+          {
             expand: true, cwd: 'bower_components/datatables/media/css/',
             src: ['jquery.dataTables.css'], dest: 'public/css/vendor/datatables'
           },
@@ -61,6 +65,10 @@ module.exports = function(grunt) {
           {
             expand: true, cwd: 'bower_components/datatables/media/images/',
             src: ['*'], dest: 'public/images'
+          },
+          {
+            expand: true, cwd: 'bower_components/gmaps/',
+            src: ['gmaps.js'], dest: 'public/js/vendor'
           }
         ]
       }
@@ -76,8 +84,10 @@ module.exports = function(grunt) {
           'public/js/lib/vendor.js': [
             'public/js/vendor/jquery.js',
             'public/js/vendor/jquery-ui.min.js',
+            'public/js/lib/google-map.js',
             'public/js/vendor/bootstrap.js',
             'public/js/vendor/moment.min.js',
+            'public/js/vendor/gmaps.js',
             'public/js/vendor/bootstrap-datetimepicker.js',
             'public/js/vendor/firebase.js',
             'public/js/vendor/datatables/jquery.dataTables.js',
@@ -85,6 +95,9 @@ module.exports = function(grunt) {
           ]
         }
       }
+    },
+    curl: {
+      'public/js/lib/google-map.js': 'http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places,geometry',
     },
     less: {
       development: {
@@ -113,6 +126,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-curl');
 
-  grunt.registerTask('default', ['copy:vendor', 'concat', 'less', 'uglify']);
+  grunt.registerTask('default', ['curl','copy:vendor', 'concat', 'less', 'uglify']);
 };

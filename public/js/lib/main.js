@@ -11,9 +11,11 @@ $(document).ready(function() {
     var caregiver = ref.child(JSON.stringify(user_id));
     var alertsTable = $('#alertsTable').DataTable({
            columns: [
-               { title: "Fall" },
-               { title: "Timestamp" }
-           ]
+               { title: "Name" },
+               { title: "Timestamp" },
+               { title: "Type"}
+           ],
+           paging: false,
     });
 
     caregiver.on("value", function(snapshot) {
@@ -28,6 +30,24 @@ $(document).ready(function() {
                  .draw();
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
+    });
+  }
+
+  if ($('#lat')) {
+    var lat = $('#lat').val();
+    var long = $('#long').val();
+
+    var map =  new GMaps({
+      div: '#map',
+      lat: lat,
+      lng:long,
+      width: '500px',
+      height: '500px',
+    });
+
+    map.addMarker({
+      lat: lat,
+      lng: long
     });
   }
 

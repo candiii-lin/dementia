@@ -40,6 +40,20 @@ module.exports = function (app, passport, isLoggedIn) {
     res.render('patient/create.ejs');
   })
 
+  app.post('/patients/last_known_position', function(req, res) {
+    var location_x = req.body.x;
+    var location_y = req.body.y;
+
+    Patient.findOne({_id: "563f57fc04e428b37dfd033a"}, function (err, patient) {
+      patient.last_known_position.x = location_x;
+      patient.last_known_position.y = location_y;
+      patient.save();
+
+      res.status(200).send('OK');
+    })
+
+
+  });
 
   app.get('/patients/:id', isLoggedIn, isAuthorized, function(req, res) {
     Patient.findOne({_id:req.params.id}, function (err, patient) {
