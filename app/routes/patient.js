@@ -19,7 +19,7 @@ module.exports = function (app, passport, isLoggedIn) {
       caregiver.save();
 
       patient.save();
-      res.status(200).send('OK');
+      res.redirect('/');
     })
 
   })
