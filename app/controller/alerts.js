@@ -14,7 +14,7 @@ exports.recieveAlert = function (dark, patientID, callback) {
       alert.timestamp = moment().format();
       alert.type = "Fall";
 
-      if (dark=="true") {
+      if (dark=="TRUE") {
         pat.is_in_dark = true;
       } else {
         pat.is_in_dark = false;
@@ -39,7 +39,7 @@ exports.recieveNotMoving = function (dark, patientID, callback) {
       alert.timestamp = moment().format();
       alert.type = "Not Moving";
 
-      if (dark=="true") {
+      if (dark=="TRUE") {
         pat.is_in_dark = true;
       } else {
         pat.is_in_dark = false;
