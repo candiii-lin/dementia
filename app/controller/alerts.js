@@ -4,7 +4,7 @@ var Patient = require('../models/patient');
 
 var motherload = new Firebase("https://dementia.firebaseio.com/");
 
-exports.recieveAlert = function (x,y,dark, patientID, callback) {
+exports.recieveAlert = function (dark, x,y,patientID, callback) {
   var alert = {};
 
   var patient = Patient.findOne({_id: patientID}, function(err, pat) {
@@ -21,6 +21,8 @@ exports.recieveAlert = function (x,y,dark, patientID, callback) {
       } else {
         pat.is_in_dark = false;
       }
+      pat.last_known_position.x = x;
+      pat.last_known_position.y = y;
 
       pat.save();
       pati.push(alert);
@@ -32,7 +34,7 @@ exports.recieveAlert = function (x,y,dark, patientID, callback) {
 }
 
 
-exports.recieveNotMoving = function (x,y,dark, patientID, callback) {
+exports.recieveNotMoving = function (dark, x,y,patientID, callback) {
   var alert = {};
   var patient = Patient.findOne({_id: patientID}, function(err, pat) {
       pati = motherload.child(JSON.stringify(pat.caregiver));
@@ -46,6 +48,9 @@ exports.recieveNotMoving = function (x,y,dark, patientID, callback) {
       } else {
         pat.is_in_dark = false;
       }
+
+      pat.last_known_position.x = x;
+      pat.last_known_position.y = y;
 
       pat.save();
       pati.push(alert);
