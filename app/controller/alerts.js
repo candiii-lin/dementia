@@ -39,7 +39,7 @@ exports.recieveNotMoving = function (dark, patientID, callback) {
       alert.timestamp = moment().format();
       alert.type = "Not Moving";
 
-      if (dark=="TRUE") {
+      if (dark=="true") {
         pat.is_in_dark = true;
       } else {
         pat.is_in_dark = false;
