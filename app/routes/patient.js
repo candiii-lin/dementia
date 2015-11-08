@@ -3,21 +3,6 @@ var User = require('../models/user');
 var _ = require('lodash');
 
 module.exports = function (app, passport, isLoggedIn) {
-  app.get('/patients/:id', isLoggedIn, isAuthorized, function(req, res) {
-    Patient.findOne({_id:req.params.id}, function (err, patient) {
-      if (!err) {
-        res.render('patient/profile.ejs',{
-          patient: patient
-        });
-      }
-    })
-
-  })
-
-  app.get('/patients/create', isLoggedIn, function (req, res) {
-    res.render('patient/create.ejs');
-  })
-
   app.post('/patients/create', isLoggedIn, function (req, res) {
 
     User.findOne({_id: req.user._id}, function(err, caregiver) {
@@ -25,7 +10,8 @@ module.exports = function (app, passport, isLoggedIn) {
       var patient = new Patient({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        birth_date: req.body.birth_date
+        birth_date: req.body.birth_date,
+        caregiver: req.user._id
       });
 
       caregiver.patient.push(patient._id);
@@ -37,6 +23,25 @@ module.exports = function (app, passport, isLoggedIn) {
     })
 
   })
+
+  app.get('/patients/create', isLoggedIn, function (req, res) {
+    res.render('patient/create.ejs');
+  })
+
+
+  app.get('/patients/:id', isLoggedIn, isAuthorized, function(req, res) {
+    Patient.findOne({_id:req.params.id}, function (err, patient) {
+      if (!err) {
+        res.render('patient/profile.ejs',{
+          patient: patient
+        });
+      }
+    })
+
+  })
+
+
+
 }
 
 function isAuthorized(req, res, next) {

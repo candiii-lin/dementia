@@ -1,23 +1,4 @@
 <div>
-  <table class="table">
-    <tr>
-      <th>
-        First Name
-      </th>
-      <th>
-        Last Name
-      </th>
-      <th>
-        birth_date
-      </th>
-    </tr>
-    <% for (var i = 0; i < patients.length; i++) { %>
-     <tr>
-       <td><a href="/patients/<%= patients[i]._id %>" +><%= patients[i].first_name %></a></td>
-       <td><%= patients[i].last_name %></td>
-       <td><%= moment(patients[i].birth_date).format('l') %></td>
-     </tr>
-    <% } %>
-  </table>
+  <table class="table" id="alertsTable" class="display" width="100%"></table>
 
 </div>

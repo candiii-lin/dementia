@@ -43,8 +43,24 @@ module.exports = function(grunt) {
             src: ['*'], dest: 'public/fonts'
           },
           {
+            expand: true, cwd: 'bower_components/datatables/media/js/',
+            src: ['jquery.dataTables.js'], dest: 'public/js/vendor/datatables'
+          },
+          {
+            expand: true, cwd: 'bower_components/datatables/media/css/',
+            src: ['jquery.dataTables.css'], dest: 'public/css/vendor/datatables'
+          },
+          {
             expand: true, cwd: 'bower_components/firebase/',
             src: ['firebase.js'], dest: 'public/js/vendor'
+          },
+          {
+            expand: true, cwd: 'bower_components/lodash/',
+            src: ['lodash.js'], dest: 'public/js/vendor'
+          },
+          {
+            expand: true, cwd: 'bower_components/datatables/media/images/',
+            src: ['*'], dest: 'public/images'
           }
         ]
       }
@@ -63,7 +79,9 @@ module.exports = function(grunt) {
             'public/js/vendor/bootstrap.js',
             'public/js/vendor/moment.min.js',
             'public/js/vendor/bootstrap-datetimepicker.js',
-            'public/js/vendor/firebase.firebase.js'
+            'public/js/vendor/firebase.js',
+            'public/js/vendor/datatables/jquery.dataTables.js',
+            'public/js/vendor/lodash.js'
           ]
         }
       }
