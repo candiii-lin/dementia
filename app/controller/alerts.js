@@ -4,7 +4,7 @@ var Patient = require('../models/patient');
 
 var motherload = new Firebase("https://dementia.firebaseio.com/");
 
-exports.recieveAlert = function (dark, patientID, callback) {
+exports.recieveAlert = function (x,y,dark, patientID, callback) {
   var alert = {};
 
   var patient = Patient.findOne({_id: patientID}, function(err, pat) {
@@ -13,6 +13,8 @@ exports.recieveAlert = function (dark, patientID, callback) {
       alert.name = pat.first_name + " " +  pat.last_name;
       alert.timestamp = moment().format();
       alert.type = "Fall";
+
+      console.log(x,y)
 
       if (dark=="TRUE") {
         pat.is_in_dark = true;
@@ -30,7 +32,7 @@ exports.recieveAlert = function (dark, patientID, callback) {
 }
 
 
-exports.recieveNotMoving = function (dark, patientID, callback) {
+exports.recieveNotMoving = function (x,y,dark, patientID, callback) {
   var alert = {};
   var patient = Patient.findOne({_id: patientID}, function(err, pat) {
       pati = motherload.child(JSON.stringify(pat.caregiver));
