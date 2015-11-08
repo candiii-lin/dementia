@@ -47,10 +47,6 @@ module.exports = function(grunt) {
             src: ['jquery.dataTables.js'], dest: 'public/js/vendor/datatables'
           },
           {
-            expand: true, cwd: 'bower_components/maplace.js/src/',
-            src: ['maplace-0.1.3.js'], dest: 'public/js/vendor'
-          },
-          {
             expand: true, cwd: 'bower_components/datatables/media/css/',
             src: ['jquery.dataTables.css'], dest: 'public/css/vendor/datatables'
           },
