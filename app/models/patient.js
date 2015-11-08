@@ -8,7 +8,8 @@ var patientSchema = mongoose.Schema({
   last_known_position :{
     x: Number,
     y: Number
-  }
+  },
+  is_in_dark : Boolean
 });
 
 module.exports = mongoose.model('Patient', patientSchema);
