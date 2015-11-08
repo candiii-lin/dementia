@@ -5,16 +5,9 @@ module.exports = function(app, passport) {
 
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
+      res.render('home.ejs')
       if (req.isAuthenticated()) {
-          var query = Patient.find({});
-          query.where('_id').in(req.user.patient);
-
-          query.exec(function (err,patients) {
-            res.render('home.ejs', {
-              patients: patients
-            });
-          });
-
+          res.render('home.ejs');
       } else {
           res.render('index.ejs');
       }

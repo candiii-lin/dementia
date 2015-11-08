@@ -3,6 +3,18 @@ var User = require('../models/user');
 var _ = require('lodash');
 
 module.exports = function (app, passport, isLoggedIn) {
+  app.get('/patients',isLoggedIn, function (req, res) {
+
+    var query = Patient.find({});
+    query.where('_id').in(req.user.patient);
+
+    query.exec(function (err,patients) {
+      res.render('patient/list.ejs', {
+        patients: patients
+      });
+    });
+  })
+
   app.post('/patients/create', isLoggedIn, function (req, res) {
 
     User.findOne({_id: req.user._id}, function(err, caregiver) {
